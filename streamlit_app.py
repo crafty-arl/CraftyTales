@@ -14,7 +14,7 @@ def generate_story_intro(character_name, character_race, character_class):
               f"Introduce the beginning of their story.")
 
     response = openai.Completion.create(
-        engine="text-davinci-002",
+        engine="gpt-3.5-turbo",
         prompt=prompt,
         max_tokens=50,
         n=1,
