@@ -1,6 +1,7 @@
 import streamlit as st
 import openai
 import os
+import webbrowser
 
 # Retrieve the OpenAI Key from the environment variables
 openai.api_key = os.getenv('OPENAI_KEY')
