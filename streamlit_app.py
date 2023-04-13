@@ -57,10 +57,6 @@ if character_name and character_race and character_class:
     st.write(story_intro)
 
     # Tweet the story
-    if st.button("Tweet"):
-        tweet_text = f"Check out this story: {story_intro} #ChooseYourOwnAdventure"
-        try:
-            api.update_status(tweet_text)
-            st.write("Successfully tweeted!")
-        except tweepy.TwitterError as e:
-            st.error("Error tweeting the story. Please try again later.")
+    tweet_url = f"https://twitter.com/intent/tweet?text=Check+out+this+story%3A+{story_intro}+%23ChooseYourOwnAdventure+_craftthefuture"
+    tweet_button = f'<a href="{tweet_url}" target="_blank">Tweet</a>'
+    st.markdown(tweet_button, unsafe_allow_html=True)
