@@ -1,38 +1,50 @@
-from collections import namedtuple
-import altair as alt
-import math
-import pandas as pd
 import streamlit as st
+import openai
+import os
 
-"""
-# Welcome to Streamlit!
+# Retrieve the Open AI Key from the environment variables
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:
+myseceret = (os.getenv("OPENAI_KEY"))
 
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
-
-In the meantime, below is an example of what you can do with just a few lines of code:
-"""
+openai.api_key = myseceret
 
 
-with st.echo(code_location='below'):
-    total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-    num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
+# Function to generate story introduction
+@st.cache_data
+def generate_story_intro(character_name, character_race, character_class):
+  prompt = (f"A new adventure begins with a character named {character_name},"
+            f"a {character_race} {character_class}. "
+            f"Introduce the beginning of their story.")
 
-    Point = namedtuple('Point', 'x y')
-    data = []
+  response = openai.Completion.create(
+    engine="text-davinci-002",
+    prompt=prompt,
+    max_tokens=150,
+    n=1,
+    stop=None,
+    temperature=0.7,
+  )
 
-    points_per_turn = total_points / num_turns
+  return response.choices[0].text.strip()
 
-    for curr_point_num in range(total_points):
-        curr_turn, i = divmod(curr_point_num, points_per_turn)
-        angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
-        radius = curr_point_num / total_points
-        x = radius * math.cos(angle)
-        y = radius * math.sin(angle)
-        data.append(Point(x, y))
 
-    st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
-        .mark_circle(color='#0068c9', opacity=0.5)
-        .encode(x='x:Q', y='y:Q'))
+# Character creation interface
+st.title("Character Creation for Adventure Story")
+
+character_name = st.text_input("Enter your character's name:")
+race_options = ["Human", "Elf", "Dwarf", "Orc", "Tiefling"]
+character_race = st.selectbox("Select your character's race:", race_options)
+class_options = ["Warrior", "Mage", "Rogue", "Cleric", "Ranger"]
+character_class = st.selectbox("Select your character's class:", class_options)
+
+if character_name and character_race and character_class:
+  st.subheader("Character Summary")
+  st.write(f"Name: {character_name}")
+  st.write(f"Race: {character_race}")
+  st.write(f"Class: {character_class}")
+
+  # Generate and display story introduction
+  st.subheader("Story Introduction")
+  story_intro = generate_story_intro(character_name, character_race,
+                                     character_class)
+  st.write(story_intro)
