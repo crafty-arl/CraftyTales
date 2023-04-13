@@ -45,6 +45,6 @@ if character_name and character_race and character_class:
     st.write(story_intro)
 
     # Tweet the story
-    tweet_url = f"https://twitter.com/intent/tweet?text=Check+out+this+story%3A+{story_intro}+%23ChooseYourOwnAdventure+_craftthefuture"
+    tweet_url = f"https://twitter.com/intent/tweet?text=Check+out+this+story%3A+{story_intro}+%23CraftyTales+@_craftthefuture"
     tweet_button = f'<a href="{tweet_url}" target="_blank">Tweet</a>'
     st.markdown(tweet_button, unsafe_allow_html=True)
