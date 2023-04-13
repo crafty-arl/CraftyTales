@@ -12,10 +12,7 @@ restart_sequence = "\nHuman: "
 # Function to generate story introduction
 @st.cache_data
 def generate_story_intro(character_name, character_race, character_class):
-    prompt = (f"The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n\nHuman: "
-              f"(f\"A new adventure begins with a character named {character_name},\"\n"
-              f" f\"a {character_race} {character_class}. \"\n"
-              f" f\"Introduce the beginning of their story.\")\n\nAI: {start_sequence}")
+    prompt = Human: (f\"A new adventure begins with a character named {character_name},\"\n              f\"a {character_race} {character_class}. \"\n              f\"Introduce the beginning of their story.\")\n
 
     response = openai.Completion.create(
         engine="text-davinci-002",
