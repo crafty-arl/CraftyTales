@@ -13,7 +13,7 @@ img = Image.open(img_path).resize((500, 500))
 # Function to generate story introduction
 @st.cache_data
 def generate_story_intro(character_name, character_race, character_class):
-    prompt = f"Human: A new adventure begins with a character named {character_name}, a {character_race} {character_class}. Introduce the beginning of their story."
+    prompt = f"Human: A new adventure begins with a character named {character_name}, a {character_race} {character_class}. Introduce the beginning of their story in 250 charcters or less."
 
     response = openai.Completion.create(
         engine="text-davinci-002",
