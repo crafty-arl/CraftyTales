@@ -56,6 +56,8 @@ with col1:
     class_options = ["Warrior", "Mage", "Rogue", "Cleric", "Ranger"]
     character_class = st.selectbox("Select your character's class:", class_options)
 
+with col2:
+    st.title("Story Generation")
     if st.button("Submit"):
         if character_name and character_race and character_class:
             st.subheader("Character Summary")
@@ -64,13 +66,9 @@ with col1:
             st.write(f"Class: {character_class}")
             st.session_state.story_generated = True
 
-with col2:
-    st.title("Story Generation")
-
     if st.session_state.get("story_generated", False):
         st.subheader("Story Introduction")
         story_intro = generate_story_intro(character_name, character_race, character_class)
-  
         st.write(story_intro)
 
         # Generate story and summary
@@ -83,10 +81,8 @@ with col2:
             frequency_penalty=0,
             presence_penalty=0,
         )
-        story = story_intro 
+        story = story_intro
         summary = summarize_story(story)
-        
-       
 
         # Tweet the story summary
         tweet_text = f"{summary} #CraftyTales @craftthefuture_ Craft Your Tale"
