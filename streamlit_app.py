@@ -19,7 +19,7 @@ def generate_story_intro(character_name, character_race, character_class):
         engine="text-davinci-002",
         prompt=prompt,
         temperature=0.7,
-        max_tokens=75,
+        max_tokens=65,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
@@ -58,7 +58,7 @@ with col2:
         st.write(story_intro)
 
         # Tweet the story
-        tweet_text = f"Check out this story: {story_intro} #CraftyTales @_craftthefuture"
+        tweet_text = f"{story_intro} #CraftyTales @craftthefuture_ Craft Your Tale: craftytales.streamlit.app/ "
         tweet_url = "https://twitter.com/intent/tweet?text=" + urllib.parse.quote(tweet_text)
         tweet_button = f'<a href="{tweet_url}" target="_blank">Tweet</a>'
         st.markdown(tweet_button, unsafe_allow_html=True)
