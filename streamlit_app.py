@@ -1,21 +1,9 @@
 import streamlit as st
 import openai
-import tweepy
 import os
 
 # Retrieve the OpenAI Key from the environment variables
 openai.api_key = os.getenv('OPENAI_KEY')
-
-# Set up the Twitter API client
-twitter_consumer_key = os.getenv('CONSUMER_KEY')
-twitter_consumer_secret = os.getenv('CONSUMER_SECRET')
-twitter_access_token = os.getenv('ACCESS_TOKEN')
-twitter_access_token_secret = os.getenv('ACCESS_TOKEN_SECRET')
-
-auth = tweepy.OAuthHandler(twitter_consumer_key, twitter_consumer_secret)
-auth.set_access_token(twitter_access_token, twitter_access_token_secret)
-api = tweepy.API(auth)
-
 
 # Function to generate story introduction
 @st.cache_data
@@ -60,3 +48,10 @@ if character_name and character_race and character_class:
     tweet_url = f"https://twitter.com/intent/tweet?text=Check+out+this+story%3A+{story_intro}+%23ChooseYourOwnAdventure+_craftthefuture"
     tweet_button = f'<a href="{tweet_url}" target="_blank">Tweet</a>'
     st.markdown(tweet_button, unsafe_allow_html=True)
+
+    # Redirect to Twitter
+    if st.button("Post to Twitter"):
+        st.markdown(f"You will be redirected to Twitter. Click the tweet button to post the story.")
+        js = "window.open('https://twitter.com/','_blank');"
+        html = '<img src onerror="{}">'.format(js)
+        st.markdown(html, unsafe_allow_html=True)
