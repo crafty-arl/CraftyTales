@@ -12,7 +12,7 @@ restart_sequence = "\nHuman: "
 # Function to generate story introduction
 @st.cache_data
 def generate_story_intro(character_name, character_race, character_class):
-    prompt = Human: (f\"A new adventure begins with a character named {character_name},\"\n              f\"a {character_race} {character_class}. \"\n              f\"Introduce the beginning of their story.\")\n
+    prompt = f"Human: A new adventure begins with a character named {character_name}, a {character_race} {character_class}. Introduce the beginning of their story."
 
     response = openai.Completion.create(
         engine="text-davinci-002",
@@ -22,7 +22,7 @@ def generate_story_intro(character_name, character_race, character_class):
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
-        stop=[" Human:", " AI:"],
+        stop=["Human:", "AI:"],
     )
 
     return response.choices[0].text.strip()
