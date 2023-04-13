@@ -38,19 +38,20 @@ character_race = st.selectbox("Select your character's race:", race_options)
 class_options = ["Warrior", "Mage", "Rogue", "Cleric", "Ranger"]
 character_class = st.selectbox("Select your character's class:", class_options)
 
-if character_name and character_race and character_class:
-    st.subheader("Character Summary")
-    st.write(f"Name: {character_name}")
-    st.write(f"Race: {character_race}")
-    st.write(f"Class: {character_class}")
+if st.button("Submit"):
+    if character_name and character_race and character_class:
+        st.subheader("Character Summary")
+        st.write(f"Name: {character_name}")
+        st.write(f"Race: {character_race}")
+        st.write(f"Class: {character_class}")
 
-    # Generate and display story introduction
-    st.subheader("Story Introduction")
-    story_intro = generate_story_intro(character_name, character_race, character_class)
-    st.write(story_intro)
+        # Generate and display story introduction
+        st.subheader("Story Introduction")
+        story_intro = generate_story_intro(character_name, character_race, character_class)
+        st.write(story_intro)
 
-# Tweet the story
-tweet_text = f"Check out this story: {story_intro} #CraftyTales @_craftthefuture"
-tweet_url = "https://twitter.com/intent/tweet?text=" + urllib.parse.quote(tweet_text)
-tweet_button = f'<a href="{tweet_url}" target="_blank">Tweet</a>'
-st.markdown(tweet_button, unsafe_allow_html=True)
+        # Tweet the story
+        tweet_text = f"Check out this story: {story_intro} #CraftyTales @_craftthefuture"
+        tweet_url = "https://twitter.com/intent/tweet?text=" + urllib.parse.quote(tweet_text)
+        tweet_button = f'<a href="{tweet_url}" target="_blank">Tweet</a>'
+        st.markdown(tweet_button, unsafe_allow_html=True)
