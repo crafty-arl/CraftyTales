@@ -2,6 +2,8 @@ import streamlit as st
 import openai
 import os
 import webbrowser
+import urllib.parse
+
 
 # Retrieve the OpenAI Key from the environment variables
 openai.api_key = os.getenv('OPENAI_KEY')
@@ -47,7 +49,8 @@ if character_name and character_race and character_class:
     story_intro = generate_story_intro(character_name, character_race, character_class)
     st.write(story_intro)
 
-    # Tweet the story
-    tweet_url = f"https://twitter.com/intent/tweet?text=Check+out+this+story%3A+{story_intro}+%23CraftyTales+@_craftthefuture"
-    tweet_button = f'<a href="{tweet_url}" target="_blank">Tweet</a>'
-    st.markdown(tweet_button, unsafe_allow_html=True)
+# Tweet the story
+tweet_text = f"Check out this story: {story_intro} #CraftyTales @_craftthefuture"
+tweet_url = "https://twitter.com/intent/tweet?text=" + urllib.parse.quote(tweet_text)
+tweet_button = f'<a href="{tweet_url}" target="_blank">Tweet</a>'
+st.markdown(tweet_button, unsafe_allow_html=True)
