@@ -1,31 +1,39 @@
 import streamlit as st
 import openai
+import tweepy
 import os
 
-# Retrieve the Open AI Key from the environment variables
+# Retrieve the OpenAI Key from the environment variables
+openai.api_key = os.getenv('OPENAI_KEY')
 
-myseceret = (os.getenv("OPENAI_KEY"))
+# Set up the Twitter API client
+twitter_consumer_key = os.getenv('CONSUMER_KEY')
+twitter_consumer_secret = os.getenv('CONSUMER_SECRET')
+twitter_access_token = os.getenv('ACCESS_TOKEN')
+twitter_access_token_secret = os.getenv('ACCESS_TOKEN_SECRET')
 
-openai.api_key = myseceret
+auth = tweepy.OAuthHandler(twitter_consumer_key, twitter_consumer_secret)
+auth.set_access_token(twitter_access_token, twitter_access_token_secret)
+api = tweepy.API(auth)
 
 
 # Function to generate story introduction
 @st.cache_data
 def generate_story_intro(character_name, character_race, character_class):
-  prompt = (f"A new adventure begins with a character named {character_name},"
-            f"a {character_race} {character_class}. "
-            f"Introduce the beginning of their story.")
+    prompt = (f"A new adventure begins with a character named {character_name},"
+              f"a {character_race} {character_class}. "
+              f"Introduce the beginning of their story.")
 
-  response = openai.Completion.create(
-    engine="text-davinci-002",
-    prompt=prompt,
-    max_tokens=150,
-    n=1,
-    stop=None,
-    temperature=0.7,
-  )
+    response = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=prompt,
+        max_tokens=150,
+        n=1,
+        stop=None,
+        temperature=0.7,
+    )
 
-  return response.choices[0].text.strip()
+    return response.choices[0].text.strip()
 
 
 # Character creation interface
@@ -38,13 +46,21 @@ class_options = ["Warrior", "Mage", "Rogue", "Cleric", "Ranger"]
 character_class = st.selectbox("Select your character's class:", class_options)
 
 if character_name and character_race and character_class:
-  st.subheader("Character Summary")
-  st.write(f"Name: {character_name}")
-  st.write(f"Race: {character_race}")
-  st.write(f"Class: {character_class}")
+    st.subheader("Character Summary")
+    st.write(f"Name: {character_name}")
+    st.write(f"Race: {character_race}")
+    st.write(f"Class: {character_class}")
 
-  # Generate and display story introduction
-  st.subheader("Story Introduction")
-  story_intro = generate_story_intro(character_name, character_race,
-                                     character_class)
-  st.write(story_intro)
+    # Generate and display story introduction
+    st.subheader("Story Introduction")
+    story_intro = generate_story_intro(character_name, character_race, character_class)
+    st.write(story_intro)
+
+    # Tweet the story
+    if st.button("Tweet"):
+        tweet_text = f"Check out this story: {story_intro} #ChooseYourOwnAdventure"
+        try:
+            api.update_status(tweet_text)
+            st.write("Successfully tweeted!")
+        except tweepy.TwitterError as e:
+            st.error("Error tweeting the story. Please try again later.")
