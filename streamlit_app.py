@@ -91,4 +91,7 @@ with col2:
         st.write(story)
 
         # Tweet the story summary
-        tweet_text = f"{summary} #CraftyTales @craftthefuture_ Craft Your Tale
+        tweet_text = f"{summary} #CraftyTales @craftthefuture_ Craft Your Tale"
+        tweet_url = "https://twitter.com/intent/tweet?text=" + urllib.parse.quote(tweet_text)
+        tweet_button = f'<a href="{tweet_url}" target="_blank">Tweet</a>'
+        st.markdown(tweet_button, unsafe_allow_html=True)
