@@ -70,6 +70,7 @@ with col2:
     if st.session_state.get("story_generated", False):
         st.subheader("Story Introduction")
         story_intro = generate_story_intro(character_name, character_race, character_class)
+  
         st.write(story_intro)
 
         # Generate story and summary
@@ -83,8 +84,8 @@ with col2:
             presence_penalty=0,
         )
         story = story_intro 
-
         summary = summarize_story(story)
+        
        
 
         # Tweet the story summary
