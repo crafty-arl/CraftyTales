@@ -16,7 +16,7 @@ def generate_story_intro(character_name, character_race, character_class):
     response = openai.Completion.create(
         engine="text-davinci-002",
         prompt=prompt,
-        max_tokens=150,
+        max_tokens=50,
         n=1,
         stop=None,
         temperature=0.7,
