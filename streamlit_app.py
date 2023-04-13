@@ -24,7 +24,6 @@ def generate_story_intro(character_name, character_race, character_class):
 
     return response.choices[0].text.strip()
 
-
 # Character creation interface
 st.title("Character Creation for Adventure Story")
 
@@ -49,10 +48,3 @@ if character_name and character_race and character_class:
     tweet_url = f"https://twitter.com/intent/tweet?text=Check+out+this+story%3A+{story_intro}+%23ChooseYourOwnAdventure+_craftthefuture"
     tweet_button = f'<a href="{tweet_url}" target="_blank">Tweet</a>'
     st.markdown(tweet_button, unsafe_allow_html=True)
-
-    # Redirect to Twitter
-    if st.button("Post to Twitter"):
-        st.markdown(f"You will be redirected to Twitter. Click the tweet button to post the story.")
-        js = "window.open('https://twitter.com/','_blank');"
-        html = '<img src onerror="{}">'.format(js)
-        st.markdown(html, unsafe_allow_html=True)
