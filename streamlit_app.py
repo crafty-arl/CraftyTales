@@ -11,9 +11,9 @@ img_path = "craftytales.png"
 img = Image.open(img_path).resize((500, 500))
 
 # Function to generate story introduction
-@st.cache_data
+@st.cache(suppress_st_warning=True)
 def generate_story_intro(character_name, character_race, character_class):
-    prompt = f"Human: A new adventure begins with a character named {character_name}, a {character_race} {character_class}. Introduce the beginning of their story in 25 words or less."
+    prompt = f"A new adventure begins with a character named {character_name}, a {character_race} {character_class}. Introduce the beginning of their story in 25 words or less."
 
     response = openai.Completion.create(
         engine="text-davinci-002",
@@ -23,13 +23,12 @@ def generate_story_intro(character_name, character_race, character_class):
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
-        stop=["Human:", "AI:"],
     )
 
     return response.choices[0].text.strip()
 
 # Function to summarize story in one sentence
-@st.cache_data
+@st.cache(suppress_st_warning=True)
 def summarize_story(story):
     response = openai.Completion.create(
         engine="text-davinci-002",
@@ -39,14 +38,13 @@ def summarize_story(story):
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
-        stop=["\n"],
     )
 
     return response.choices[0].text.strip()
 
 # Character creation interface
 st.set_page_config(layout='wide')
-col1, col2 = st.beta_columns(2)
+col1, col2 = st.columns(2)
 
 with col1:
     st.image(img, caption="A Digital Storytelling Companion")
@@ -77,13 +75,12 @@ with col2:
         # Generate story and summary
         response = openai.Completion.create(
             engine="text-davinci-002",
-            prompt=f"Human: {story_intro}\nAI:",
+            prompt=f"{story_intro}\n",
             temperature=0.7,
             max_tokens=1024,
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0,
-            stop=["Human:", "AI:"],
         )
         story = story_intro + response.choices[0].text.strip()
 
