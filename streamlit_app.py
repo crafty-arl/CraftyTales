@@ -19,7 +19,7 @@ def generate_story_intro(character_name, character_race, character_class):
         engine="text-davinci-002",
         prompt=prompt,
         temperature=0.7,
-        max_tokens=100,
+        max_tokens=75,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
