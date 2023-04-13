@@ -89,3 +89,7 @@ with col2:
         tweet_url = "https://twitter.com/intent/tweet?text=" + urllib.parse.quote(tweet_text)
         tweet_button = f'<a href="{tweet_url}" target="_blank">Tweet</a>'
         st.markdown(tweet_button, unsafe_allow_html=True)
+
+        # Stop execution after the Tweet button is displayed
+        st.stop()
+
