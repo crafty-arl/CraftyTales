@@ -3,11 +3,12 @@ import openai
 import os
 import webbrowser
 import urllib.parse
-
+from PIL import Image
 
 # Retrieve the OpenAI Key from the environment variables
 openai.api_key = os.getenv('OPENAI_KEY')
-
+img_path = "image.jpg"
+img = Image.open(img_path)
 start_sequence = "\nAI:"
 restart_sequence = "\nHuman: "
 
@@ -30,8 +31,8 @@ def generate_story_intro(character_name, character_race, character_class):
     return response.choices[0].text.strip()
 
 # Character creation interface
-st.title("Character Creation for Adventure Story")
-
+st.title("CraftyTales")
+st.image(img, caption="Image Caption")
 character_name = st.text_input("Enter your character's name:")
 race_options = ["Human", "Elf", "Dwarf", "Orc", "Tiefling"]
 character_race = st.selectbox("Select your character's race:", race_options)
