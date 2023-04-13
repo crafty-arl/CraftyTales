@@ -6,20 +6,26 @@ import webbrowser
 # Retrieve the OpenAI Key from the environment variables
 openai.api_key = os.getenv('OPENAI_KEY')
 
+start_sequence = "\nAI:"
+restart_sequence = "\nHuman: "
+
 # Function to generate story introduction
 @st.cache_data
 def generate_story_intro(character_name, character_race, character_class):
-    prompt = (f"A new adventure begins with a character named {character_name},"
-              f"a {character_race} {character_class}. "
-              f"Introduce the beginning of their story.")
+    prompt = (f"The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n\nHuman: "
+              f"(f\"A new adventure begins with a character named {character_name},\"\n"
+              f" f\"a {character_race} {character_class}. \"\n"
+              f" f\"Introduce the beginning of their story.\")\n\nAI: {start_sequence}")
 
     response = openai.Completion.create(
-        engine="gpt-3.5-turbo",
+        engine="text-davinci-002",
         prompt=prompt,
-        max_tokens=50,
-        n=1,
-        stop=None,
         temperature=0.7,
+        max_tokens=150,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0,
+        stop=[" Human:", " AI:"],
     )
 
     return response.choices[0].text.strip()
