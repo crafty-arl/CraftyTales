@@ -48,11 +48,12 @@ with col1:
             st.write(f"Name: {character_name}")
             st.write(f"Race: {character_race}")
             st.write(f"Class: {character_class}")
+            st.session_state.story_generated = True
 
 with col2:
     st.title("Story Generation")
 
-    if character_name and character_race and character_class:
+    if st.session_state.get("story_generated", False):
         st.subheader("Story Introduction")
         story_intro = generate_story_intro(character_name, character_race, character_class)
         st.write(story_intro)
@@ -62,3 +63,4 @@ with col2:
         tweet_url = "https://twitter.com/intent/tweet?text=" + urllib.parse.quote(tweet_text)
         tweet_button = f'<a href="{tweet_url}" target="_blank">Tweet</a>'
         st.markdown(tweet_button, unsafe_allow_html=True)
+        st.session_state.story_generated = False
