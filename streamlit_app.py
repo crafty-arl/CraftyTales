@@ -7,7 +7,7 @@ from PIL import Image
 
 # Retrieve the OpenAI Key from the environment variables
 openai.api_key = os.getenv('OPENAI_KEY')
-img_path = "image.jpg"
+img_path = "craftytales.png"
 img = Image.open(img_path)
 start_sequence = "\nAI:"
 restart_sequence = "\nHuman: "
