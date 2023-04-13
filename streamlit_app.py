@@ -82,10 +82,10 @@ with col2:
             frequency_penalty=0,
             presence_penalty=0,
         )
-        story = story_intro + response.choices[0].text.strip()
+        story = story_intro 
 
         summary = summarize_story(story)
-        st.write(story)
+       
 
         # Tweet the story summary
         tweet_text = f"{summary} #CraftyTales @craftthefuture_ Craft Your Tale"
