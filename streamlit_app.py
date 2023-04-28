@@ -22,14 +22,14 @@ import os
 
 openai.api_key = os.getenv('OPENAI_KEY')
 
-with open("D:\Langchain-Crafty+\Crafty+GameRules") as f:
+with open("Crafty+GameRules.json") as f:
     data = yaml.load(f, Loader=yaml.FullLoader)
 json_spec = JsonSpec(dict_=data, max_value_length=4000)
 json_toolkit = JsonToolkit(spec=json_spec)
 
 
 # Load the documents
-loader = CSVLoader("D:\Langchain-Crafty+\Crafty+Database.csv")
+loader = CSVLoader("Crafty+Database.csv")
 
 # Create an index
 index_creator = VectorstoreIndexCreator()
