@@ -37,7 +37,7 @@ docsearch = index_creator.from_loaders([loader])
 
 # QA Chain and Agent
 chain = RetrievalQA.from_chain_type(llm=ChatOpenAI(temperature=0,model_name='gpt-3.5-turbo'), chain_type="stuff", retriever=docsearch.vectorstore.as_retriever(), input_key="question")
-agent = create_csv_agent(OpenAI(temperature=0,model_name='gpt-3.5-turbo'), 'D:\Langchain-Crafty+\Crafty+Database.csv', verbose=True)
+agent = create_csv_agent(OpenAI(temperature=0,model_name='gpt-3.5-turbo'), 'Crafty+Database.csv', verbose=True)
 json_agent_executor = create_json_agent(
     llm=OpenAI(temperature=0),
     toolkit=json_toolkit,
