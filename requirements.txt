@@ -4,3 +4,4 @@ openai
 PyYAML
 langchain
 chromadb
+tiktoken
