@@ -1,0 +1,37 @@
+{
+    "Introduction": "Crafty+ is a versatile trading card game focusing on strategy, adaptability, and storytelling. Players build decks around powerful characters, locations, events, and items, striving to outwit their opponents and achieve victory in various game scenarios.",
+    "Card Types": {
+      "Character Cards": "Represent heroes, villains, and allies. Each character card has Energy Levels, Power, Influence, and Synergy attributes, determining how they interact with other cards. Characters have abilities that can be activated once per turn, without any additional energy cost, unless specified on the card.",
+      "Location Cards": "Represent various places in the game world, granting unique effects or advantages. Location cards can influence horizontal, diagonal, or spread rows on the grid, depending on the card.",
+      "Event Cards": "Represent pivotal moments or occurrences with a direct impact on the game state. Event cards have an immediate effect and are then discarded.",
+      "Item Cards": "Represent powerful artifacts, weapons, or tools that characters can wield. Item cards are equipped to specific characters, enhancing their abilities or providing other benefits."
+    },
+    "Turn Structure": {
+      "Draw Phase": "Draw a card from your deck. If your deck is empty, you cannot draw a card.",
+      "Energy Phase": "Gain 1 energy point. Use energy points to play cards or activate abilities.",
+      "Main Phase": {
+        "Play Character Card": "Pay energy equal to the character's Energy Level, place the card on an unoccupied grid space. Maximum of three character cards on the grid at a time.",
+        "Play Location, Event, or Item Card": "Pay the card's energy cost and follow its effect as described on the card.",
+        "Activate Character Ability": "Unless specified, characters can use their abilities once per turn without additional energy cost.",
+        "Move Character": "Move one of your characters to an adjacent unoccupied grid space, either horizontally or vertically."
+      },
+      "Combat Phase": {
+        "Power": "Use the character's Power level to deal damage or remove other characters from the grid.",
+        "Synergy": "Use the character's Synergy level to work together with other characters, creating combos or chain effects.",
+        "Influence": "Use the character's Influence level to manipulate other characters or the game state, affecting victory conditions."
+      },
+      "End Phase": "Resolve any end-of-turn effects and pass the turn to your opponent."
+    },
+    "Last Man Standing Objective": {
+      "Goal": "Eliminate all opposing characters on the grid to become the last man standing.",
+      "Strategy": "Focus on character placement, ability activation, and item usage to outmaneuver your opponent and eliminate their characters while protecting your own."
+    },
+    "Unique Game Variations": {
+      "Solo Play": "Play against a pre-constructed AI deck with custom scenarios, objectives, or challenges.",
+      "Team Play": "Form teams and work together to achieve common goals, such as defeating a powerful boss or completing a challenging objective.",
+      "Draft Play": "Create decks on the fly by selecting cards from a limited pool, testing players' adaptability and knowledge of game mechanics.",
+      "Story Mode": "Create a narrative campaign, with each game representing a chapter in an unfolding story. Unique victory conditions and objectives can be set for each chapter.",
+      "Custom Scenarios": "Design unique scenarios with specific victory conditions or objectives, offering endless possibilities for creative and strategic gameplay."
+    }
+  }
+  
