@@ -20,7 +20,7 @@ from langchain.requests import TextRequestsWrapper
 from langchain.tools.json.tool import JsonSpec
 import os
 
-openai.api_key = os.getenv('OPENAI_KEY')
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 with open("Crafty+GameRules") as f:
     data = yaml.load(f, Loader=yaml.FullLoader)
