@@ -22,7 +22,7 @@ import os
 
 openai.api_key = os.getenv('OPENAI_KEY')
 
-with open("Crafty+GameRules.json") as f:
+with open("\Crafty+GameRules.json") as f:
     data = yaml.load(f, Loader=yaml.FullLoader)
 json_spec = JsonSpec(dict_=data, max_value_length=4000)
 json_toolkit = JsonToolkit(spec=json_spec)
