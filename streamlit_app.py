@@ -2,6 +2,7 @@
 import streamlit as st
 import yaml
 import pandas as pd
+import openai
 
 from langchain.agents import (
     create_json_agent,
